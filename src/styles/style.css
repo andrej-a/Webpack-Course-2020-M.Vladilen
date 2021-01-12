@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    text-align: center;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.box {
+    width: 200px;
+    height: 200px;
+    background-color: #ff45aa;
+    margin: 20px 20px;
+}
+
+.buttonCreate {
+    width: 90px;
+    height: 30px;
+    border: none;
+    background-color: #abcd;
+    font-size: 15px;
+    text-align: center;
+    outline: none;
+}
