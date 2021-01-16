@@ -14,7 +14,7 @@ export default class CreateBox {
         width: ${this.width};
         height: ${this.height};
         margin: ${this.margin};
-        background-color: ${this.background}
+        background-color: ${this.background};
         `;
         this.wrapper.append(box);
     }

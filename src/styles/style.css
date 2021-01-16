@@ -4,8 +4,14 @@
     box-sizing: border-box;
 }
 
+@font-face{ /*подключаем шрифты через webpack*/
+    font-family: 'PottaOne';
+    src: url('../assets/fonts/PottaOne-Regular.ttf') format('truetype');
+}
+
 .container {
     text-align: center;
+    font-family: 'PottaOne', sans-serif;
 }
 
 .wrapper {
@@ -29,4 +35,14 @@
     font-size: 15px;
     text-align: center;
     outline: none;
+}
+
+.logo {
+    width: 200px;
+    height: 200px;
+    margin: 20px 20px;
+    padding: 0 auto;
+    background-color:#aabcaa; 
+    background-image: url("../assets/logo.png");
+    background-size: cover;
 }
