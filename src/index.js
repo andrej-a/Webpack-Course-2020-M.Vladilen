@@ -1,6 +1,8 @@
 "use strict";
 import './styles/style.css'; //импортируем здесь файл css и плотно работаем с лоадерами(смотри comments и настройки)
+import './styles/less.less'; //импортируем здесь файл less и плотно работаем с лоадерами(смотри comments и настройки)
 import * as $ from 'jquery'; //импортируем jquery
+import './babel'; //подключаем babel.js
 import CreateBox from './class';
 import {analyticks} from './analyticks';
 import exampleJSON from '@assets/exampleJSON';  //при импорте .json {} не ставятся

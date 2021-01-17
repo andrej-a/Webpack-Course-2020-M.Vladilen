@@ -33,3 +33,12 @@ Webpack не понимает расширения картинок. Для эт
 Устанваливаем npm install -D mini-css-extract-plugin. Дальше файл настроек.
 13)Оптимизация CSS.
 Устанавливаем npm install -D terser-webpack-plugin и npm install -D optimize-css-assets-webpack-plugin
+14) Работа с .less
+Устанавливаем npm install -D less-loader и npm install -D less. Дальше файл настроек.
+С .sass принцип такой же.
+15)Работа с babel.
+Установка npm i -D babel-loader @babel/core. Файл настроек.
+А еще в babel нужно настроить пресеты npm install --save-dev @babel/preset-env. 
+И полифилы npm install --save @babel/polyfill.
+И плагины.
+

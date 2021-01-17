@@ -1,7 +1,9 @@
 // этот файл работает как инструмент для сборки и не идёт дополнением к основному приложению
+
 const isDev = process.env.NODE_ENV === 'development'; //определение режима в котором мы находимся (true или false)
 //настройки в скриптах файла package.json
 const isProd = !isDev;
+
 const path = require('path'); //подключаем встроенный модуль NodeJS для output/path
 const HTMLWebpackPlugin = require('html-webpack-plugin');  //установив (см п4.1 в comments), подкючаем плагин
 const {CleanWebpackPlugin} = require('clean-webpack-plugin'); //установка CleanWebpackPlugin (см п4.2 в comments)
@@ -10,6 +12,7 @@ const MiniCSSExtractPlugin = require('mini-css-extract-plugin'); //подклю�
 
 const OptimizeAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin'); // подключаем два плагина для оптимизации CSS
+
 const optimization = () => {
     const config = { //используется, если несколько файлов используют одну и ту же библиотеку
         splitChunks: {
@@ -24,15 +27,32 @@ const optimization = () => {
     }
     return config;
 };
+
+function filename(ext) { //динамическое изменение имен файлов
+    return isDev ? `[name]${ext}` : `[name].[hash].${ext}`;
+}
+
+/* function cssLoaders(extra) { //функция обработки лоадеров
+    const config = [{
+        loader: MiniCSSExtractPlugin.loader, 
+        options: {
+          publicPath: '', 
+        },
+      }, 'css-loader']
+      if (extra) {
+          config.push(extra)
+      }
+      return config;
+} */
 module.exports = {      //экспортируем объект
     context: path.resolve(__dirname, 'src'),     //показываем webpack, где лежат исодники файлов
-    mode: 'development',        //режим работы. По умолчанию -- production
+    mode: "development",        //режим работы. По умолчанию -- production
     entry: {        //entry -- точка входа. Отсюда webpack начинает. Может содержать несколько точек
-        index: './index.js',
+        index: ['@babel/polyfill', './index.js'],//здесь подкл. полифилы из правила[4]
         analyticks: './analyticks.js'
     },        
     output: {       //указываем, куда webpack должен отдать код
-        filename: "[name].[contenthash].js",       //паттерн name, динамически указывает на ключ entry
+        filename: filename('.js'),       //паттерн name, динамически указывает на ключ entry
                         //паттерн contenthash, на выходе задает именем хэш файла 
         path: path.resolve(__dirname, 'dist')
     },
@@ -62,9 +82,10 @@ module.exports = {      //экспортируем объект
         ], 
         }),
         new MiniCSSExtractPlugin({ //настраиваем создание css-файла
-            filename: '[name].[contenthash].css'
+            filename: filename('.css')
         }),
     ],
+    devtool: isDev ? 'source-map' : '', //исходные карты кода
     module: {       //тут делаем лоадер
         rules: [        //тут пишем правила
             {
@@ -72,7 +93,7 @@ module.exports = {      //экспортируем объект
                 use: [{
                     loader: MiniCSSExtractPlugin.loader, //хз почему так, но по-другому не работает
                     options: {
-                      publicPath: '/public/path/to/',
+                      publicPath: '', //должен быть пустой, влияет на пути в упакованном файле
                     },
                   }, 'css-loader'] //он пропускает все через css-loader, а потом
                 //упаковывает в файл через плагин
@@ -84,6 +105,31 @@ module.exports = {      //экспортируем объект
             {
                 test: /\.ttf$/, //правила такие же, как и с css
                 use: ['file-loader']
+            },
+            {
+                test: /\.less$/,     //как только webpack видит что-то с расширением less
+                use: [{
+                    loader: MiniCSSExtractPlugin.loader, 
+                    options: {
+                      publicPath: '',
+                    },
+                  }, 
+                  'css-loader',
+                  'less-loader'] //он пропускает все через less-loader, потом css-loader, а потом
+                //упаковывает в файл через плагин
+            },
+            {
+                test: /\.js$/, //для babel если видим js
+                exclude: /node_modules/, //то проходим через лоадер, за исключением node_modules
+                loader: 'babel-loader',
+                options: {
+                    presets: [
+                        '@babel/preset-env'
+                    ],
+                    plugins: [
+                        '@babel/plugin-proposal-class-properties'
+                    ]
+                }
             },
         ]
     },

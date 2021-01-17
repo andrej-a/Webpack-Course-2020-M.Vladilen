@@ -6,7 +6,7 @@
 
 @font-face{ /*подключаем шрифты через webpack*/
     font-family: 'PottaOne';
-    src: url(/public/path/to/ef127180d0733a37a77616b08552753b.ttf) format('truetype');
+    src: url(ef127180d0733a37a77616b08552753b.ttf) format('truetype');
 }
 
 .container {
@@ -43,6 +43,21 @@
     margin: 20px 20px;
     padding: 0 auto;
     background-color:#aabcaa; 
-    background-image: url(/public/path/to/e068c3f79ac7ddb3497bc6bc5a456384.png);
+    background-image: url(e068c3f79ac7ddb3497bc6bc5a456384.png);
     background-size: cover;
 }
+.lessBox {
+  width: 200px;
+  height: 200px;
+  background-color: #ccf;
+  text-align: center;
+  margin: 20px 20px;
+}
+.lessBox h2 {
+  font-size: 15px;
+  color: #3a0a79;
+  padding-top: 15px;
+}
+
+
+/*# sourceMappingURL=index.css.map*/

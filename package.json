@@ -8,6 +8,7 @@
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "start": "cross-env NODE_ENV=development webpack --mode development"
   },
+  "browserslist": "> 0.25%, not dead",
   "keywords": [
     "javasript",
     "webpack"
@@ -15,12 +16,18 @@
   "author": "Andrej <andrej@mail.ru>",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "@babel/preset-env": "^7.12.11",
+    "babel-loader": "^8.2.2",
     "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^7.0.0",
     "cross-env": "^7.0.3",
     "css-loader": "^5.0.1",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^4.5.1",
+    "less": "^4.1.0",
+    "less-loader": "^7.2.1",
     "mini-css-extract-plugin": "^1.3.4",
     "optimize-css-assets-webpack-plugin": "^5.0.4",
     "style-loader": "^2.0.0",
@@ -29,6 +36,7 @@
     "webpack-cli": "^4.3.1"
   },
   "dependencies": {
+    "@babel/polyfill": "^7.12.1",
     "jquery": "^3.5.1"
   }
 }
